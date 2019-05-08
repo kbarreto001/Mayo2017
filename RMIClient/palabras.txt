@@ -1,0 +1,2 @@
+fichero.txt protocolo 5
+fichero2.txt vacaciones 4
