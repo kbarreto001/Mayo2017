@@ -16,10 +16,11 @@ public class SocketTCPClient {
                 Socket client = new Socket("localhost", 5000);
                 DataOutputStream dosSocket = new DataOutputStream(client.getOutputStream());
                 DataInputStream disSocket = new DataInputStream(client.getInputStream());) {
-            ComandC fich = new ComandC();
+            ComandC fich = new ComandC();    
             
             fichero = fich.LeerFichero(nombreFichero=fich.NombreFichero());
-            fich.EnviarFichero(fichero, dosSocket, nombreFichero);      
+            fich.EnviarFichero(fichero, dosSocket, nombreFichero);
+            fich.LeerFicheroN(fich.RecibirInfoFinal(disSocket));          
                         
         } catch (IOException ex) {
             System.out.println("Error: " + ex.getLocalizedMessage());

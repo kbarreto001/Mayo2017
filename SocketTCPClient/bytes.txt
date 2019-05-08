@@ -1,0 +1,2 @@
+fichero.txt 5 10
+fichero2.txt 17 97
