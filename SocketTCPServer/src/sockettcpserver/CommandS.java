@@ -36,31 +36,38 @@ public class CommandS {
         File ficheroN = new File(nombreFichero);
         try (
                 DataOutputStream dos = new DataOutputStream(new FileOutputStream(ficheroN));) {
-            for (int i=0;i<fichero.length;i++){
+            for (int i = 0; i < fichero.length; i++) {
                 dos.writeByte(fichero[i]);
             }
-             System.out.println("Fichero guardado correctamente");             
+            System.out.println("Fichero guardado correctamente");
         }
     }
 
-    public void Repeticiones (Byte[] fichero){
-        Byte[] ceros = new Byte[256];        
-        int maxR=0,maxV=0;
-        for (int i=0;i<ceros.length;i++){
-            for(int j=0;j<fichero.length;j++){
-                if ((int)fichero[j]==i){
-                    ceros[i]=(byte)((int)ceros[i]+1);
+    public void Repeticiones(Byte[] fichero, DataOutputStream dosSocket) {
+        Byte[] ceros = new Byte[256];
+        for (int i = 0; i < ceros.length; i++) {
+            ceros[i] = 0;
+        }
+        int maxR = 0, maxV = 0;
+        for (int i = 0; i < ceros.length; i++) {
+            for (int j = 0; j < fichero.length; j++) {
+                if (fichero[j] == i) {
+                    ceros[i] = (byte) ((int) ceros[i] + 1);
                 }
             }
         }
-        for (int k=0;k<ceros.length;k++){
-            if(ceros[k]>maxR){
-                maxR=ceros[k];
-                maxV=k;
+        for (int k = 0; k < ceros.length; k++) {
+            if (ceros[k] > maxR) {
+                maxR = ceros[k];
+                maxV = k;
             }
         }
-        System.out.println("El que mas se repite es: "+maxV);
-        System.out.println("se repitio: "+maxR);        
+        try {
+            dosSocket.writeUTF(String.valueOf(maxR) + " " + String.valueOf(maxV));
+        } catch (IOException ex) {
+            System.out.println("Error: " + ex.getLocalizedMessage());
+        }
+
     }
 
 }

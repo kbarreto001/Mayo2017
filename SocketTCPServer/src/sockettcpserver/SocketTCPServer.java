@@ -23,7 +23,7 @@ public class SocketTCPServer {
                 
                 fichero=otro.RecibirFichero(disSocket);
                 otro.GuardarFichero(fichero);
-                otro.Repeticiones(fichero);
+                otro.Repeticiones(fichero,dosSocket);
                 
                 connection.close();
                 dosSocket.close();
